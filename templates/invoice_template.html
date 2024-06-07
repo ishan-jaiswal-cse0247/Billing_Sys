@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Invoice</title>
+    <style>
+      /* Add necessary CSS styling to match the desired invoice format */
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .header,
+      .footer {
+        width: 100%;
+        text-align: center;
+      }
+      .header {
+        margin-bottom: 20px;
+      }
+      .footer {
+        position: fixed;
+        bottom: 0;
+      }
+      .content {
+        margin: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="{{ company_logo }}" alt="Company Logo" width="100" />
+    </div>
+    <div class="content">
+      <h2>Invoice</h2>
+      <table>
+        <tr>
+          <td>Seller Details:</td>
+          <td>{{ seller_details }}</td>
+        </tr>
+        <tr>
+          <td>Billing Details:</td>
+          <td>{{ billing_details }}</td>
+        </tr>
+        <tr>
+          <td>Shipping Details:</td>
+          <td>{{ shipping_details }}</td>
+        </tr>
+        <tr>
+          <td>Place of Supply:</td>
+          <td>{{ place_of_supply }}</td>
+        </tr>
+        <tr>
+          <td>Place of Delivery:</td>
+          <td>{{ place_of_delivery }}</td>
+        </tr>
+        <tr>
+          <td>Order Details:</td>
+          <td>Order No.: {{ order_no }}<br />Order Date: {{ order_date }}</td>
+        </tr>
+        <tr>
+          <td>Invoice Details:</td>
+          <td>
+            Invoice No.: {{ invoice_no }}<br />Invoice Date: {{ invoice_date }}
+          </td>
+        </tr>
+        <tr>
+          <td>Reverse Charge:</td>
+          <td>{{ reverse_charge }}</td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th>Description</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Discount</th>
+          <th>Net Amount</th>
+          <th>Tax Rate</th>
+          <th>CGST</th>
+          <th>SGST</th>
+          <th>IGST</th>
+          <th>Total Amount</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+          <td>{{ item.description }}</td>
+          <td>{{ item.unit_price }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.discount }}</td>
+          <td>{{ item.net_amount }}</td>
+          <td>{{ item.tax_rate }}%</td>
+          <td>{{ item.cgst }}</td>
+          <td>{{ item.sgst }}</td>
+          <td>{{ item.igst }}</td>
+          <td>{{ item.total_amount }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <h3>Total: {{ total_amount }}</h3>
+      <h4>Amount in words: {{ amount_in_words }}</h4>
+    </div>
+    <div class="footer">
+      <p>For <strong>{{ seller_name }}</strong></p>
+      <img src="{{ signature }}" alt="Signature" width="100" />
+      <p>Authorised Signatory</p>
+    </div>
+  </body>
+</html>
